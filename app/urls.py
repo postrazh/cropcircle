@@ -3,7 +3,7 @@
 Copyright (c) 2019 - present AppSeed.us
 """
 
-from django.urls import path, re_path
+from django.urls import path, include
 from .views import *
 
 urlpatterns = [
@@ -13,6 +13,5 @@ urlpatterns = [
 
     path('view', ViewView.as_view(), name='view'),
     path('upload', UploadView.as_view(), name='upload'),
-
-
+    path('api/', include('app.api.urls'))
 ]

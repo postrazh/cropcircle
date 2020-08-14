@@ -27,31 +27,37 @@
                         </div>
 
                     </div>
-                    <div class="card-body">
+                    <!--begin::Form-->
+                    <form class="form" id="kt_form">
 
-                        <!--begin::Search Form-->
-                        <div class="form-group row">
-                            <div class="flex-grow-1 mx-5">
-                                <div class="typeahead">
-                                    <input class="form-control" id="kt_typeahead_view" type="text"
-                                           placeholder="Keyword"/>
+                        <div class="card-body">
 
+                            <!--begin::Search Form-->
+                            <div class="form-group row">
+                                <div class="flex-grow-1 mx-5">
+                                    <div class="typeahead">
+                                        <input class="form-control" id="kt_typeahead_view" type="text" name="typeahead"
+                                               placeholder="Keyword"/>
+
+                                    </div>
+                                </div>
+
+                                <div class="mr-5">
+                                    <a id="btn_search" class="btn btn-light-primary px-6 font-weight-bold">
+                                        Search
+                                    </a>
                                 </div>
                             </div>
+                            <!--end: Search Form-->
 
-                            <div class="mr-5">
-                                <a href="#" class="btn btn-light-primary px-6 font-weight-bold">
-                                    Search
-                                </a>
-                            </div>
+                            <!--begin: Datatable-->
+                            <div class="datatable datatable-bordered datatable-head-custom"
+                                 id="kt_datatable"></div>
+                            <!--end: Datatable-->
                         </div>
-                        <!--end: Search Form-->
 
-                        <!--begin: Datatable-->
-                        <div class="datatable datatable-bordered datatable-head-custom"
-                             id="kt_datatable"></div>
-                        <!--end: Datatable-->
-                    </div>
+                    </form>
+                    <!--end::Form-->
                 </div>
             </div>
             <!--end::Card-->

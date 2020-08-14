@@ -4,14 +4,16 @@
 var KTTypeahead = function () {
 
     // Private functions
+    var validator;
+
     var initTypeahead = function () {
         // constructs the suggestion engine
         var bloodhound = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.whitespace,
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            // `states` is an array of state names defined in "The Basics"
+            // `states` is an array of state names defined in \"The Basics\"
             remote: {
-                url: '../api/view_keywords?=%QUERY',
+                url: '../api/search?input=%QUERY',
                 wildcard: '%QUERY'
             }
         });
@@ -19,17 +21,66 @@ var KTTypeahead = function () {
         $('#kt_typeahead_view').typeahead({
             hint: true,
             highlight: true,
-            minLength: 1
+            minLength: 0,
         }, {
-            name: 'states',
+            name: 'value',
+            limit: Infinity,
+            // source: function (query, syncResults, asyncResults) {
+            //     $.get('../api/search?input=' + query, function (data) {
+            //         asyncResults(data);
+            //     });
+            // },
+
             source: bloodhound
         });
     }
+
+    var _initValidation = function () {
+        // Validation Rules
+        validator = FormValidation.formValidation(
+            document.getElementById('kt_form'),
+            {
+                fields: {
+                    typeahead: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Typeahead is required'
+                            }
+                        }
+                    },
+                },
+
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+					// Validate fields when clicking the Submit button
+					submitButton: new FormValidation.plugins.SubmitButton(),
+            		// Submit the form when all fields are valid
+            		defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+                    // Bootstrap Framework Integration
+                    bootstrap: new FormValidation.plugins.Bootstrap({
+                        eleInvalidClass: '',
+                        eleValidClass: '',
+                    })
+                }
+            }
+        );
+    }
+
+    var initSearch = function () {
+        $('#btn_search').on('click', function () {
+            validator.revalidateField('typeahead');
+            console.log('search');
+        })
+
+    }
+
 
     return {
         // public functions
         init: function () {
             initTypeahead();
+            _initValidation();
+            initSearch();
         }
     };
 }();

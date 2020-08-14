@@ -149,5 +149,5 @@ class FieldTesting(models.Model):
     harvest_dest_date = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        # managed = False
+        managed = False
         db_table = 'field_testing'
