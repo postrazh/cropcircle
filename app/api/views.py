@@ -1,7 +1,17 @@
 
+from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from .serializers import *
+
+class ValidatorView(APIView):
+
+    def get(self, request):
+        rows = FieldTesting.objects.filter(tpt_id_key__iexact=request.GET['typeahead'])
+        if rows.count() == 0:
+            return Response({'valid': False})
+        else:
+            return Response({'valid': True})
 
 class SearchApiView(ListAPIView):
     serializer_class = FieldTestingSerializer

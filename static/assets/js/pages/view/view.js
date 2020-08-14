@@ -32,6 +32,16 @@ var KTTypeahead = function () {
             // },
 
             source: bloodhound
+        }).on('keyup', function (e) {
+            // Clear validation error
+            validator.resetForm();
+
+            // Submit on enter
+            if (e.keyCode == 13) {
+                $('#kt_typeahead_view').typeahead('close');
+                search();
+            }
+
         });
     }
 
@@ -43,19 +53,22 @@ var KTTypeahead = function () {
                 fields: {
                     typeahead: {
                         validators: {
-                            notEmpty: {
-                                message: 'Typeahead is required'
+                            remote: {
+                                message: 'Please enter a valid Trial Id',
+                                method: 'GET',
+                                url: '../api/validate'
                             }
                         }
                     },
                 },
 
                 plugins: {
-                    trigger: new FormValidation.plugins.Trigger(),
-					// Validate fields when clicking the Submit button
-					submitButton: new FormValidation.plugins.SubmitButton(),
-            		// Submit the form when all fields are valid
-            		defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+                    // trigger: new FormValidation.plugins.Trigger(),
+
+                    // Validate fields when clicking the Submit button
+                    submitButton: new FormValidation.plugins.SubmitButton(),
+                    // Submit the form when all fields are valid
+                    defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
                     // Bootstrap Framework Integration
                     bootstrap: new FormValidation.plugins.Bootstrap({
                         eleInvalidClass: '',
@@ -68,12 +81,17 @@ var KTTypeahead = function () {
 
     var initSearch = function () {
         $('#btn_search').on('click', function () {
-            validator.revalidateField('typeahead');
-            console.log('search');
+            search();
         })
 
     }
 
+    var search = function () {
+        validator.revalidateField('typeahead');
+
+        var keyword = $('#kt_typeahead_view').val();
+        console.log('search : ', keyword);
+    }
 
     return {
         // public functions

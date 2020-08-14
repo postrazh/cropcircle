@@ -6,6 +6,12 @@
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
+    <style>
+    .fv-plugins-message-container {
+        height: 16px;
+        margin: 5px;
+    }
+    </style>
 {% endblock stylesheets %}
 
 <!--begin::Content-->
@@ -30,22 +36,26 @@
                     <!--begin::Form-->
                     <form class="form" id="kt_form">
 
-                        <div class="card-body">
+                        <div class="card-body pt-0">
 
                             <!--begin::Search Form-->
-                            <div class="form-group row">
-                                <div class="flex-grow-1 mx-5">
-                                    <div class="typeahead">
-                                        <input class="form-control" id="kt_typeahead_view" type="text" name="typeahead"
-                                               placeholder="Keyword"/>
+                            <div class="form-group" style="display: flex; flex-direction: column-reverse">
+                                <div class="row">
+                                    <div class="flex-grow-1 mx-5">
+
+                                        <div class="typeahead">
+                                            <input class="form-control" id="kt_typeahead_view" type="text"
+                                                   name="typeahead"
+                                                   placeholder="Keyword"/>
+                                            <span class="form-text text-muted">Please select trial from dropdown before searching</span>
+                                        </div>
 
                                     </div>
-                                </div>
-
-                                <div class="mr-5">
-                                    <a id="btn_search" class="btn btn-light-primary px-6 font-weight-bold">
-                                        Search
-                                    </a>
+                                    <div class="mr-5">
+                                        <a id="btn_search" class="btn btn-light-primary px-6 font-weight-bold">
+                                            Search
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <!--end: Search Form-->
