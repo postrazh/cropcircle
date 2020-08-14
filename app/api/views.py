@@ -4,7 +4,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from .serializers import *
 
-class ValidatorView(APIView):
+class ValidatorApiView(APIView):
 
     def get(self, request):
         rows = FieldTesting.objects.filter(tpt_id_key__iexact=request.GET['typeahead'])
@@ -13,8 +13,17 @@ class ValidatorView(APIView):
         else:
             return Response({'valid': True})
 
+
 class SearchApiView(ListAPIView):
-    serializer_class = FieldTestingSerializer
+    serializer_class = SearchSerializer
+    def get_queryset(self):
+        if 'query' in self.request.GET and self.request.GET['query'] != '':
+            return self.serializer_class.Meta.model.objects.filter(tpt_id_key__iexact=self.request.GET['query'])[:50]
+        else:
+            return self.serializer_class.Meta.model.objects.all()[:50]
+
+class KeywordsApiView(ListAPIView):
+    serializer_class = KeywordsSerializer
 
     def get_queryset(self):
         if 'input' in self.request.GET:
