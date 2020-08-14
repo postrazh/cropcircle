@@ -1,0 +1,112 @@
+{% extends "layout/base.html" %}
+{% load static %}
+{% block title %}
+    View
+{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+    <style>
+        .dz-progress {
+            /* progress bar covers file name */
+            display: none !important;
+        }
+    </style>
+{% endblock stylesheets %}
+
+<!--begin::Content-->
+{% block content %}
+
+    <!--begin::Container-->
+    <div class=" container ">
+
+        <!--begin::Row-->
+        <div class="row">
+            <!--begin::Card-->
+            <div class="col-lg-12">
+                <div class="card card-custom">
+                    <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                        <div class="card-title">
+                            <h3 class="card-label">
+                                Upload
+                                <span class="d-block text-muted pt-2 font-size-sm">Upload multiple csv files</span>
+                            </h3>
+                        </div>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="form-group row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="dropzone dropzone-default dropzone-primary" id="kt_dropzone_2">
+                                    <div class="dropzone-msg dz-message needsclick">
+                                        <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+                                        <span class="dropzone-msg-desc">Upload up to 10 files</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mx-auto">
+                                <button type="reset" class="btn btn-light-primary mr-2">Submit</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Row-->
+
+        <!--begin:Files Wrapper-->
+        <div class="files-wrapper">
+            <!--begin::File Item-->
+            <div id="file-item-first" class="file-item" style="display: none">
+                <div class="card card-custom mt-5">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <select class="form-control select2" name="param"
+                                        multiple="multiple">
+                                </select>
+                            </div>
+                            <div class="col-md-3 my-auto">
+                                <div class="file-name text-truncate">ab</div>
+                            </div>
+                            <div class="col-md-1 my-auto px-3">
+                                <div class="progress" style="height: 7px">
+                                    <div class="progress-bar d-none" role="progressbar" style="width: 100%"
+                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--end::Card-->
+                </div>
+            </div>
+            <!--end::File Item-->
+
+        </div>
+        <!--end:Files Wrapper-->
+
+
+    </div>
+    <!--end::Container-->
+
+{% endblock content %}
+<!--end::Content-->
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="{% static 'assets/plugins/custom/fullcalendar/fullcalendar.bundle.js' %}"></script>
+    <!--end::Page Vendors-->
+
+    <script src="{% static 'assets/js/pages/upload/upload.js' %}"></script>
+
+{% endblock javascripts %}

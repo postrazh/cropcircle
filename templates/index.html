@@ -1,0 +1,51 @@
+{% extends "layout/base.html" %}
+{% load static %}
+{% block title %}
+    View
+{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+{% endblock stylesheets %}
+
+<!--begin::Content-->
+{% block content %}
+
+    <!--begin::Container-->
+    <div class=" container ">
+        <!--begin::Row-->
+        <div class="row">
+            <!--begin::Card-->
+            <div class="col-lg-12 col-xxl-4 order-1 order-xxl-2">
+                <div class="card card-custom">
+                    <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                        <div class="card-title">
+                            <h3 class="card-label">
+                                Home
+                                <span class="d-block text-muted pt-2 font-size-sm">Home page</span>
+                            </h3>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Row-->
+    </div>
+    <!--end::Container-->
+
+{% endblock content %}
+<!--end::Content-->
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="{% static 'assets/plugins/custom/fullcalendar/fullcalendar.bundle.js' %}"></script>
+    <!--end::Page Vendors-->
+
+{% endblock javascripts %}
