@@ -2,28 +2,21 @@
 
 // Class definition
 var KTTypeahead = function () {
-    var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-        'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
-        'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-        'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-        'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-        'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-        'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-        'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-        'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-    ];
 
     // Private functions
-    var demo2 = function () {
+    var initTypeahead = function () {
         // constructs the suggestion engine
         var bloodhound = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.whitespace,
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             // `states` is an array of state names defined in "The Basics"
-            local: states
+            remote: {
+                url: '../api/view_keywords?=%QUERY',
+                wildcard: '%QUERY'
+            }
         });
 
-        $('#kt_typeahead_2, #kt_typeahead_2_modal').typeahead({
+        $('#kt_typeahead_view').typeahead({
             hint: true,
             highlight: true,
             minLength: 1
@@ -36,7 +29,7 @@ var KTTypeahead = function () {
     return {
         // public functions
         init: function () {
-            demo2();
+            initTypeahead();
         }
     };
 }();
@@ -46,7 +39,7 @@ var KTDatatableJsonRemoteDemo = function () {
     // Private functions
 
     // basic demo
-    var demo = function () {
+    var initDatatable = function () {
         var datatable = $('#kt_datatable').KTDatatable({
             // datasource definition
             data: {
@@ -259,7 +252,7 @@ var KTDatatableJsonRemoteDemo = function () {
     return {
         // public functions
         init: function () {
-            demo();
+            initDatatable();
         }
     };
 }();
