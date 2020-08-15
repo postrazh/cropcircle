@@ -4,20 +4,35 @@
 // Class definition
 var KTDropzoneDemo = function () {
     // Private functions
-    const initDropzone = function () {
+    var initDropzone = function () {
         // multiple file upload
         $('#kt_dropzone_2').dropzone({
-            url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
+            url: "https://ennpzz6e0mxll.x.pipedream.net", // Set the url for your upload script location
             paramName: "file", // The name that will be used to transfer the file
             maxFiles: 10,
             maxFilesize: 100, // MB
             // addRemoveLinks: true,
             acceptedFiles: ".csv",
-            autoQueue: false,
+            autoProcessQueue: false,
+
             init: function () {
                 this.on("addedfile", addCardItem);
+                this.on("sending", function (file, xhr, formData) {
+                    formData.append("myuser", "bob");
+                    formData.append("myuser", "bob2");
+
+                    formData.append("user", "ac");
+                    formData.append("user", "ac2");
+                });
+
+                var dropZone = this;
+
+                $('#btn-submit').on('click', function () {
+                    dropZone.processQueue();
+                });
             }
         });
+
 
     }
 
@@ -50,23 +65,23 @@ var KTDropzoneDemo = function () {
     };
 
     const addKeywordItem = function ($cardItem) {
-            console.log('Add keyword row');
+        console.log('Add keyword row');
 
-            var $keywordsWrapper = $cardItem.find('.keywords-wrapper');
-            var $keywordItem = $keywordsWrapper.find('.keyword-item#keyword-item-first').clone().attr('id', '').css('display', '');
+        var $keywordsWrapper = $cardItem.find('.keywords-wrapper');
+        var $keywordItem = $keywordsWrapper.find('.keyword-item#keyword-item-first').clone().attr('id', '').css('display', '');
 
-            var $btnRemove = $keywordItem.find('.btn-remove');
-            $btnRemove.on('click', function () {
-                $keywordItem.remove();
-            });
+        var $btnRemove = $keywordItem.find('.btn-remove');
+        $btnRemove.on('click', function () {
+            $keywordItem.remove();
+        });
 
-            // Append item
-            $keywordsWrapper.append($keywordItem);
+        // Append item
+        $keywordsWrapper.append($keywordItem);
 
-            // Init typeahead
-            var $typeheadItem = $keywordItem.find('.typeahead-trial');
-            KTTypeahead.init($typeheadItem);
-        }
+        // Init typeahead
+        var $typeheadItem = $keywordItem.find('.typeahead-trial');
+        KTTypeahead.init($typeheadItem);
+    }
 
 
     return {
