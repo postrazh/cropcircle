@@ -18,11 +18,55 @@ var KTDropzoneDemo = function () {
             init: function () {
                 this.on("addedfile", addCardItem);
                 this.on("sending", function (file, xhr, formData) {
-                    formData.append("myuser", "bob");
-                    formData.append("myuser", "bob2");
+                    // console.log(file.name);
+                    // Find keyword rows by filltering with file name
+                    var $keywords = $(`.keyword-item[file-name="${file.name}"]`);
 
-                    formData.append("user", "ac");
-                    formData.append("user", "ac2");
+                    var trial = $keywords.find('.typeahead-trial.tt-input').map(function () {
+                        return $(this).val();
+                    }).get();
+                    // console.log(trial);
+                    formData.append('trial', trial);
+
+                    var lat1 = $keywords.find('.input-lat-1').map(function () {
+                        return $(this).val();
+                    }).get();
+                    formData.append('lat1', lat1);
+
+                    var lng1 = $keywords.find('.input-lng-1').map(function () {
+                        return $(this).val();
+                    }).get();
+                    formData.append('lng1', lng1);
+
+                    var lat2 = $keywords.find('.input-lat-2').map(function () {
+                        return $(this).val();
+                    }).get();
+                    formData.append('lat2', lat2);
+
+                    var lng2 = $keywords.find('.input-lng-2').map(function () {
+                        return $(this).val();
+                    }).get();
+                    formData.append('lng2', lng2);
+
+                    var lat3 = $keywords.find('.input-lat-3').map(function () {
+                        return $(this).val();
+                    }).get();
+                    formData.append('lat3', lat3);
+
+                    var lng3 = $keywords.find('.input-lng-3').map(function () {
+                        return $(this).val();
+                    }).get();
+                    formData.append('lng3', lng3);
+
+                    var lat4 = $keywords.find('.input-lat-4').map(function () {
+                        return $(this).val();
+                    }).get();
+                    formData.append('lat4', lat4);
+
+                    var lng4 = $keywords.find('.input-lng-4').map(function () {
+                        return $(this).val();
+                    }).get();
+                    formData.append('lng4', lng4);
                 });
 
                 var dropZone = this;
@@ -43,6 +87,18 @@ var KTDropzoneDemo = function () {
             return;
         }
 
+        // Prevent duplicated file uploading
+        if (this.files.length) {
+            let _i, _len;
+            for (_i = 0, _len = this.files.length; _i < _len - 1; _i++) // -1 to exclude current file
+            {
+                if (this.files[_i].name === file.name && this.files[_i].size === file.size && this.files[_i].lastModifiedDate.toString() === file.lastModifiedDate.toString()) {
+                    this.removeFile(file);
+                    return;
+                }
+            }
+        }
+
         // console.log('file: ', file);
 
         var $cardsWrapper = $('.cards-wrapper');
@@ -56,19 +112,24 @@ var KTDropzoneDemo = function () {
 
         var $addBtn = $cardItem.find('.btn-add');
 
-        $addBtn.on('click', () => addKeywordItem($cardItem));
+        var fileName = file.name;
+
+        $addBtn.on('click', () => addKeywordItem($cardItem, fileName));
 
         // Append item
         $cardsWrapper.append($cardItem);
 
-        addKeywordItem($cardItem);
+        addKeywordItem($cardItem, fileName);
     };
 
-    const addKeywordItem = function ($cardItem) {
+    const addKeywordItem = function ($cardItem, fileName) {
         console.log('Add keyword row');
 
         var $keywordsWrapper = $cardItem.find('.keywords-wrapper');
         var $keywordItem = $keywordsWrapper.find('.keyword-item#keyword-item-first').clone().attr('id', '').css('display', '');
+
+        // Save file name
+        $keywordItem.attr('file-name', fileName);
 
         var $btnRemove = $keywordItem.find('.btn-remove');
         $btnRemove.on('click', function () {
