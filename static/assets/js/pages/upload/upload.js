@@ -16,7 +16,10 @@ var KTDropzoneDemo = function () {
             autoProcessQueue: false,
 
             init: function () {
+                var myDropzone = this;
+
                 this.on("addedfile", addCardItem);
+
                 this.on("sending", function (file, xhr, formData) {
                     // console.log(file.name);
                     // Find keyword rows by filltering with file name
@@ -69,10 +72,39 @@ var KTDropzoneDemo = function () {
                     formData.append('lng4', lng4);
                 });
 
-                var dropZone = this;
+                this.on('complete', function (file) {
+                    myDropzone.removeFile(file);
 
+                    // Update file status
+                    var $fileStatus = $(`.file-status[file-name="${file.name}"]`);
+                    $fileStatus.html('<span class="label label-lg label-light-success label-inline">Success</span>');
+
+                    $fileStatus.attr('file-name', '');
+                })
+
+                this.on('error', function (file, error) {
+                    myDropzone.removeFile(file);
+
+                    // Update file status
+                    var $fileStatus = $(`.file-status[file-name="${file.name}"]`);
+                    $fileStatus.html('<span class="label label-lg label-light-danger label-inline">Failed</span>');
+
+                    $fileStatus.attr('file-name', '');
+                })
+
+                // Submit button
                 $('#btn-submit').on('click', function () {
-                    dropZone.processQueue();
+                    // Update file status
+                    var files = myDropzone.getAcceptedFiles();
+
+                    files.forEach(function (file, index) {
+                        // Update file status
+                        var $fileStatus = $(`.file-status[file-name="${file.name}"]`);
+                        $fileStatus.html('<span class="label label-lg label-light-warning label-inline">In Progress</span>');
+                    })
+
+                    // Process
+                    myDropzone.processQueue();
                 });
             }
         });
@@ -108,12 +140,12 @@ var KTDropzoneDemo = function () {
         $fileName.text(file.name);
 
         var $fileStatus = $cardItem.find('.file-status');
+        $fileStatus.attr('file-name', file.name);
         $fileStatus.html('<span class="label label-lg label-light-dark label-inline">Not Uploaded</span>');
 
         var $addBtn = $cardItem.find('.btn-add');
 
         var fileName = file.name;
-
         $addBtn.on('click', () => addKeywordItem($cardItem, fileName));
 
         // Append item
