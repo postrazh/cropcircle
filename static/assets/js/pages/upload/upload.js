@@ -48,6 +48,11 @@ var KTDropzoneDemo = function () {
             var $keywordsWrapper = $cardItem.find('.keywords-wrapper');
             var $keywordItem = $keywordsWrapper.find('.keyword-item#keyword-item-first').clone().attr('id', '').css('display', '');
 
+            var $btnRemove = $keywordItem.find('.btn-remove');
+            $btnRemove.on('click', function () {
+                $keywordItem.remove();
+            });
+
             // Append item
             $keywordsWrapper.append($keywordItem);
 
@@ -63,7 +68,7 @@ var KTDropzoneDemo = function () {
             initDropzone();
 
             // Test
-            addCardItem({name: 'testfile.docx'});
+            // addCardItem({name: 'testfile.docx'});
         }
     };
 }();
