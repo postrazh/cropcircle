@@ -10,8 +10,9 @@ var KTDropzoneDemo = function () {
             url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
             paramName: "file", // The name that will be used to transfer the file
             maxFiles: 10,
-            maxFilesize: 10, // MB
+            maxFilesize: 100, // MB
             // addRemoveLinks: true,
+            acceptedFiles: ".csv",
             autoQueue: false,
             init: function () {
                 this.on("addedfile", addCardItem);
@@ -21,6 +22,12 @@ var KTDropzoneDemo = function () {
     }
 
     const addCardItem = function (file) {
+        // Check file extension
+        if (file.name.slice(-3).toLowerCase() != "csv") {
+            this.removeFile(file);
+            return;
+        }
+
         // console.log('file: ', file);
 
         var $cardsWrapper = $('.cards-wrapper');
