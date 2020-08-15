@@ -14,84 +14,150 @@ var KTDropzoneDemo = function () {
             // addRemoveLinks: true,
             autoQueue: false,
             init: function () {
-                this.on("addedfile", onAddedfile);
+                this.on("addedfile", addCardItem);
             }
         });
 
     }
 
-    const onAddedfile = function (file) {
+    const addCardItem = function (file) {
         // console.log('file: ', file);
 
-        var $filesWrapper = $('.files-wrapper');
-        var $fileItem = $('.files-wrapper .file-item#file-item-first').clone().attr('id', '').css('display', '');
-        var $selectItem = $fileItem.find('.form-control.select2');
-        var $fileName = $fileItem.find('.file-name');
-        var $progressBar = $fileItem.find('.progress-bar');
-        $progressBar.removeClass('d-none');
-        $progressBar.addClass('bg-success');
+        var $cardsWrapper = $('.cards-wrapper');
+        var $cardItem = $cardsWrapper.find('.card-item#card-item-first').clone().attr('id', '').css('display', '');
 
-        $progressBar.removeClass('d-none');
-        $progressBar.addClass('bg-danger');
-
+        var $fileName = $cardItem.find('.file-name');
         $fileName.text(file.name);
 
-        $filesWrapper.append($fileItem);
-        KTSelect2.init($selectItem);
+        var $fileStatus = $cardItem.find('.file-status');
+        $fileStatus.html('<span class="label label-lg label-light-dark label-inline">Not Uploaded</span>');
+
+        var $addBtn = $cardItem.find('.btn-add');
+
+        $addBtn.on('click', () => addKeywordItem($cardItem));
+
+        // Append item
+        $cardsWrapper.append($cardItem);
+
+        addKeywordItem($cardItem);
     };
+
+    const addKeywordItem = function ($cardItem) {
+            console.log('Add keyword row');
+
+            var $keywordsWrapper = $cardItem.find('.keywords-wrapper');
+            var $keywordItem = $keywordsWrapper.find('.keyword-item#keyword-item-first').clone().attr('id', '').css('display', '');
+
+            // Append item
+            $keywordsWrapper.append($keywordItem);
+
+            // Init typeahead
+            var $typeheadItem = $keywordItem.find('.typeahead-trial');
+            KTTypeahead.init($typeheadItem);
+        }
 
 
     return {
         // public functions
         init: function () {
             initDropzone();
+
+            // Test
+            addCardItem({name: 'testfile.docx'});
         }
     };
 }();
 <!--end:File Upload-->
 
-
-<!--begin:Multi Select-->
 // Class definition
-var KTSelect2 = function () {
-    // Private functions
-    var demos = function ($selectItem) {
-        // multi select
+var KTTypeahead = function () {
 
-        // loading data from array
-        var data = [{
-            id: 0,
-            text: 'Enhancement'
-        }, {
-            id: 1,
-            text: 'Bug'
-        }, {
-            id: 2,
-            text: 'Duplicate'
-        }, {
-            id: 3,
-            text: 'Invalid'
-        }, {
-            id: 4,
-            text: 'Wontfix'
-        }];
+    var initTypeahead = function ($typeheadItem) {
+        var validator;
 
-        $selectItem.select2({
-            placeholder: "Select a value",
-            data: data
+        // constructs the suggestion engine
+        var bloodhound = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.whitespace,
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            // `states` is an array of state names defined in \"The Basics\"
+            remote: {
+                url: '../api/keywords?input=%QUERY',
+                wildcard: '%QUERY'
+            }
         });
 
+        $typeheadItem.typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 0,
+        }, {
+            name: 'value',
+            limit: Infinity,
+            // source: function (query, syncResults, asyncResults) {
+            //     $.get('../api/search?input=' + query, function (data) {
+            //         asyncResults(data);
+            //     });
+            // },
+
+            source: bloodhound
+        }).on('keyup', function (e) {
+            // Clear validation error
+            if (validator)
+                validator.resetForm();
+        }).blur(function () {
+            if (validator)
+                validator.revalidateField('typeahead');
+        });
+
+        // Init validation
+        validator = _initValidation($typeheadItem);
     }
 
+    var _initValidation = function ($typeheadItem) {
+        var $form = $typeheadItem.closest('form');
+        // Validation Rules
+        var validator = FormValidation.formValidation(
+            $form.get(0),
+            {
+                fields: {
+                    typeahead: {
+                        validators: {
+                            remote: {
+                                message: 'Please enter a valid Trial Id',
+                                method: 'GET',
+                                url: '../api/validate'
+                            }
+                        }
+                    },
+                },
 
-    // Public functions
+                plugins: {
+                    // trigger: new FormValidation.plugins.Trigger(),
+
+                    // Validate fields when clicking the Submit button
+                    submitButton: new FormValidation.plugins.SubmitButton(),
+                    // Submit the form when all fields are valid
+                    defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+                    // Bootstrap Framework Integration
+                    bootstrap: new FormValidation.plugins.Bootstrap({
+                        eleInvalidClass: '',
+                        eleValidClass: '',
+                    })
+                }
+            }
+        );
+
+        return validator;
+    }
+
     return {
-        init: function ($selectItem) {
-            demos($selectItem);
+        // public functions
+        init: function ($typeheadItem) {
+            initTypeahead($typeheadItem);
         }
     };
 }();
-<!--end:Multi Select-->
+
 
 KTUtil.ready(function () {
     KTDropzoneDemo.init();

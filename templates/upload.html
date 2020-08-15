@@ -11,6 +11,17 @@
             /* progress bar covers file name */
             display: none !important;
         }
+
+        .fv-plugins-message-container {
+            height: 16px;
+            margin: 5px;
+        }
+
+        td {
+            vertical-align: bottom !important;
+            padding-top: 0 !important;
+            padding-bottom: 15px !important;
+        }
     </style>
 {% endblock stylesheets %}
 
@@ -50,7 +61,7 @@
 
                         <div class="row">
                             <div class="mx-auto">
-                                <button type="reset" class="btn btn-light-primary mr-2">Submit</button>
+                                <a id="btn-submit" class="btn btn-primary font-weight-bolder font-size-sm" href="#">Submit</a>
                             </div>
                         </div>
 
@@ -61,133 +72,133 @@
         </div>
         <!--end::Row-->
 
-        <!--begin::Advance Table Widget 5-->
-                            <div class="card card-custom mt-5">
-                                <!--begin::Header-->
-                                <div class="card-header border-0 py-5">
-                                    <h3 class="card-title align-items-start flex-column">
-                                        <span class="card-label font-weight-bolder text-dark">FA 503XJE1 Genius 1te Überfahrt -1DAA.CSV</span>
-                                        <div class="mt-2">
-                                            <span class="label label-lg label-light-warning label-inline">In Progress</span>
-                                            <span class="label label-lg label-light-success label-inline">Success</span>
-                                            <span class="label label-lg label-light-danger label-inline">Failed</span>
-                                        </div>
-                                    </h3>
-                                    <div class="card-toolbar">
-                                        <a href="#" class="btn btn-primary font-weight-bolder font-size-sm">Add</a>
-                                    </div>
-                                </div>
-                                <!--end::Header-->
-
-                                <!--begin::Body-->
-                                <div class="card-body py-0">
-                                    <!--begin::Table-->
-                                    <div class="table-responsive">
-                                        <table class="table table-head-custom table-vertical-center"
-                                            id="kt_advance_table_widget_2">
-                                            <thead>
-                                                <tr class="text-uppercase">
-                                                    <th class="pl-0 w-25" style="min-width: 100px">trial</th>
-                                                    <th style="min-width: 50px">lat 1</th>
-                                                    <th style="min-width: 50px">lng 1</th>
-                                                    <th style="min-width: 50px">lat 2</th>
-                                                    <th style="min-width: 50px">lng 2</th>
-                                                    <th style="min-width: 50px">lat 3</th>
-                                                    <th style="min-width: 50px">lng 3</th>
-                                                    <th class="pr-0 text-right" style="min-width: 50px">action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="pl-0">
-                                                        <input class="form-control" type="text" value="0.0" id="example-text-input">
-                                                    </td>
-
-                                                    <td>
-                                                        <input class="form-control" type="text" value="0.0" id="example-text-input">
-                                                    </td>
-
-                                                    <td>
-                                                        <input class="form-control" type="text" value="0.0" id="example-text-input">
-                                                    </td>
-
-                                                    <td>
-                                                        <input class="form-control" type="text" value="0.0" id="example-text-input">
-                                                    </td>
-
-                                                    <td>
-                                                        <input class="form-control" type="text" value="0.0" id="example-text-input">
-                                                    </td>
-
-                                                    <td>
-                                                        <input class="form-control" type="text" value="0.0" id="example-text-input">
-                                                    </td>
-
-                                                    <td>
-                                                        <input class="form-control" type="text" value="0.0" id="example-text-input">
-                                                    </td>
-
-                                                    <td class="pr-0 text-right">
-
-                                                        <a href="#"
-                                                            class="btn btn-icon btn-light btn-hover-danger btn-sm">
-                                                            <span class="svg-icon svg-icon-md svg-icon-danger">
-                                                                <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg--><svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                    width="24px" height="24px" viewBox="0 0 24 24"
-                                                                    version="1.1">
-                                                                    <g stroke="none" stroke-width="1" fill="none"
-                                                                        fill-rule="evenodd">
-                                                                        <rect x="0" y="0" width="24" height="24" />
-                                                                        <path
-                                                                            d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z"
-                                                                            fill="#000000" fill-rule="nonzero" />
-                                                                        <path
-                                                                            d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z"
-                                                                            fill="#000000" opacity="0.3" />
-                                                                    </g>
-                                                                </svg>
-                                                                <!--end::Svg Icon--></span> </a>
-
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!--end::Table-->
-                                </div>
-                                <!--end::Body-->
-                            </div>
-                            <!--end::Advance Table Widget 5-->
-
-
         <!--begin:Files Wrapper-->
-        <div class="files-wrapper">
+        <div class="cards-wrapper">
             <!--begin::File Item-->
-            <div id="file-item-first" class="file-item">
-                <div class="card card-custom mt-5">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <select class="form-control select2" name="param"
-                                        multiple="multiple">
-                                </select>
-                            </div>
-                            <div class="col-md-3 my-auto">
-                                <div class="file-name text-truncate">ab</div>
-                            </div>
-                            <div class="col-md-1 my-auto px-3">
-                                <div class="progress" style="height: 7px">
-                                    <div class="progress-bar d-none" role="progressbar" style="width: 100%"
-                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
+            <div class="card-item" id="card-item-first" style="display: none">
 
+                <div class="card card-custom mt-5">
+                    <!--begin::Header-->
+                    <div class="card-header border-0 py-5">
+                        <h3 class="card-title align-items-start flex-column">
+                            <span class="file-name card-label font-weight-bolder text-dark">FA 503XJE1 Genius 1te Überfahrt -1DAA.CSV</span>
+                            <div class="file-status mt-2">
+                                <span class="label label-lg label-light-dark label-inline">Not Uploaded</span>
+                                <span class="label label-lg label-light-warning label-inline">In Progress</span>
+                                <span class="label label-lg label-light-success label-inline">Success</span>
+                                <span class="label label-lg label-light-danger label-inline">Failed</span>
+                            </div>
+                        </h3>
+                        <div class="card-toolbar">
+                            <a class="btn-add btn btn-info font-weight-bolder font-size-sm">Add</a>
+                        </div>
                     </div>
-                    <!--end::Card-->
+                    <!--end::Header-->
+
+                    <!--begin::Body-->
+                    <div class="card-body py-0">
+                        <!--begin::Table-->
+                        <div> <!-- class="table-responsive" -->
+                            <table class="table table-head-custom table-vertical-center">
+                                <thead>
+                                <tr class="text-uppercase">
+                                    <th class="pl-0 w-25" style="min-width: 100px">trial</th>
+                                    <th style="min-width: 50px">lat 1</th>
+                                    <th style="min-width: 50px">lng 1</th>
+                                    <th style="min-width: 50px">lat 2</th>
+                                    <th style="min-width: 50px">lng 2</th>
+                                    <th style="min-width: 50px">lat 3</th>
+                                    <th style="min-width: 50px">lng 3</th>
+                                    <th style="min-width: 50px">lat 4</th>
+                                    <th style="min-width: 50px">lng 4</th>
+                                    <th class="pr-0 text-right" style="min-width: 50px">action</th>
+                                </tr>
+                                </thead>
+                                    <tbody class="keywords-wrapper">
+                                    <tr class="keyword-item" id="keyword-item-first" style="display: none">
+                                        <td class="pl-0">
+                                            <!--begin::Form-->
+                                            <form class="form">
+
+                                                <!--begin::Search Form-->
+                                                <div class="form-group mb-0"
+                                                     style="display: flex; flex-direction: column-reverse">
+                                                    <div class="row">
+                                                        <div class="flex-grow-1 mx-5">
+                                                            <div class="typeahead">
+                                                                <input class="typeahead-trial form-control typeahead-input" type="text"
+                                                                       name="typeahead" placeholder="Keyword"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--end: Search Form-->
+
+                                            </form>
+                                            <!--end::Form-->
+                                        </td>
+
+                                        <td>
+                                            <input class="input-lat-1 form-control" type="text" value="0.0">
+                                        </td>
+                                        <td>
+                                            <input class="input-lng-1 form-control" type="text" value="0.0">
+                                        </td>
+
+                                        <td>
+                                            <input class="input-lat-2 form-control" type="text" value="0.0">
+                                        </td>
+                                        <td>
+                                            <input class="input-lng-2 form-control" type="text" value="0.0">
+                                        </td>
+
+                                        <td>
+                                            <input class="input-lat-3 form-control" type="text" value="0.0">
+                                        </td>
+                                        <td>
+                                            <input class="input-lng-3 form-control" type="text" value="0.0">
+                                        </td>
+
+                                        <td>
+                                            <input class="input-lat-4 form-control" type="text" value="0.0">
+                                        </td>
+                                        <td>
+                                            <input class="input-lng-4 form-control" type="text" value="0.0">
+                                        </td>
+
+                                        <td class="pr-0 text-right pb-6">
+                                            <a href="#"
+                                               class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                                                                <span class="svg-icon svg-icon-md svg-icon-danger">
+                                                                    <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg--><svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                        width="24px" height="24px" viewBox="0 0 24 24"
+                                                                        version="1.1">
+                                                                        <g stroke="none" stroke-width="1" fill="none"
+                                                                           fill-rule="evenodd">
+                                                                            <rect x="0" y="0" width="24" height="24"/>
+                                                                            <path
+                                                                                    d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z"
+                                                                                    fill="#000000" fill-rule="nonzero"/>
+                                                                            <path
+                                                                                    d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z"
+                                                                                    fill="#000000" opacity="0.3"/>
+                                                                        </g>
+                                                                    </svg>
+                                                                    <!--end::Svg Icon--></span> </a>
+
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--end::Table-->
+                    </div>
+                    <!--end::Body-->
                 </div>
+
             </div>
             <!--end::File Item-->
 
